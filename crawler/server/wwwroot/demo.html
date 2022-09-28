@@ -12,6 +12,7 @@
   <p>Seed URL: <a href="{{ .Seed }}"  target="opentype">{{ .Seed }}</a></p>
   <p>Fetch {{ .NNode }} URLs</p>
   <p>Totally {{ .NEdge }} edges</p>
+  <p>Time costs: {{ .Cost }}</p>
   <p><a href="{{ .Most }}"  target="opentype">{{ .Most }}</a> is frequently accessed</p>
   <ol start="0">
     {{ range .Urls}}

@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"sync"
 	"text/template"
+	"time"
 
 	"github.com/fetch"
 	"github.com/topo_client"
@@ -19,6 +20,7 @@ type FetchWrap struct {
 	Seed  string
 	Urls  []string
 	Path  string
+	Cost  time.Duration
 }
 
 type DemoWrap struct {
@@ -42,7 +44,6 @@ func main() {
 	})
 
 	http.HandleFunc("/demo", func(w http.ResponseWriter, r *http.Request) {
-		// r.ParseForm()
 		t, err := template.ParseFiles("wwwroot/demo.html")
 		if t == nil {
 			fmt.Println(err)
@@ -65,7 +66,7 @@ func main() {
 			wg.Add(1)
 			go func(url string, i int) {
 				defer wg.Done()
-
+				start := time.Now()
 				nnode, nedge, most, mf := fetch.Crawl(url)
 
 				// ==========================
@@ -78,6 +79,7 @@ func main() {
 					Seed:  url,
 					Urls:  urls,
 					Path:  path,
+					Cost:  time.Since(start),
 				})
 				fmt.Println(demo.Content)
 				demo.mu.Unlock()
@@ -85,11 +87,11 @@ func main() {
 			}(url, i)
 		}
 		wg.Wait()
-
 		t.Execute(w, demo.Content)
 	})
 
 	http.HandleFunc("/crawler", func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
 		r.ParseForm()
 		t, _ := template.ParseFiles("wwwroot/res.html")
 		if t == nil {
@@ -105,6 +107,7 @@ func main() {
 			NEdge: nedge,
 			Most:  most,
 			Seed:  url,
+			Cost:  time.Since(start),
 		}
 		wrap.Urls, wrap.Path = topo_client.SendTopoRequest(mf)
 		// ==========================

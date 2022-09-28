@@ -8,21 +8,23 @@
 
 <body>
   <h1>Welcome to Web Crawler</h1>
-  <hr>
+  <hr width="50%" align="left">
   
   <h2>Notes</h2>
-  <li>ONLY fetch 3 URLs in one page and URLs in the page are randomly chosen</li>
+  <li>Only fetch 3 URLs in one page and URLs in the page are randomly chosen</li>
   <li>It will stop fetch if the depth is more than 3</li>
   <li>Because if fetch more URLs in one page or increase the depth of fetch, the graph generated will be cluttered</li>
+  <li>If the URL fetched matches more than 2 subdomain with the seed URL, the URL will be blocked</li>
   <li>If the graph generated is confusing, please reflesh the web page</li>
-  <hr>
+  <li>You have to add "http://" or "https://" before the URL you want to crawl</li>
+  <hr width="50%" align="left">
   
   <h3>(It takes <font color = red>a little time</font> to crawl web pages&#129315;)</h3>
   <img src="http://localhost:8081/static/1.jpg" width="10%" style="margin-right: 15px;" />
   <img src="http://localhost:8081/static/2.jpg" width="10%" style="margin-right: 15px;" />
   <img src="http://localhost:8081/static/3.jpg" width="10%" />
-  
-  <hr>
+  <hr width="50%" align="left">
+
   <h2>Click here to run demo</h2>
   <h3>(seeds: https://www.tongji.edu.cn, https://www.fudan.edu.cn, https://www.sjtu.edu.cn, https://www.mit.edu)</h3>
   <!-- <h3>seed urls are</h3>
@@ -34,7 +36,8 @@
     enctype="application/x-www-form-urlencoded">
     <input type="submit" value="demo" />
   </form>
-  <hr>
+  <hr width="50%" align="left">
+
   <h2>Please input the url you want to crawl</h2>
   <form action="http://localhost:8080/crawler"     method="post"
     enctype="application/x-www-form-urlencoded">
