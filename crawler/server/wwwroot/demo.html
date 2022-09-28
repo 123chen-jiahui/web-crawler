@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>web crawler</title>
+</head>
+
+<body>
+  <h1>Here are the results</h1>
+  {{ range . }}
+  <p>Seed URL: <a href="{{ .Seed }}"  target="opentype">{{ .Seed }}</a></p>
+  <p>Fetch {{ .NNode }} URLs</p>
+  <p>Totally {{ .NEdge }} edges</p>
+  <p><a href="{{ .Most }}"  target="opentype">{{ .Most }}</a> is frequently accessed</p>
+  <ol start="0">
+    {{ range .Urls}}
+    <li style="font-size: 10px;"><a href="{{ . }}" target="opentype">{{ . }}</a></li>
+    {{ end }}
+  </ol>
+  <img src="{{ .Path }}" />
+  <hr>
+  {{ end }}
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "./;proto";
+
+service Draw {
+  rpc Topology (TopologyRequest) returns (TopologyReply) {}
+}
+
+message Destination {
+	repeated int32 Nodes = 1;	
+}
+
+message TopologyRequest {
+	string SaveLocation = 1;
+	int32 Total = 2;
+	repeated string Contents = 3;
+  map<int32, Destination> G = 4;
+}
+
+message TopologyReply {
+  bool Ok = 1;
+	string FilePath = 2;
+}
